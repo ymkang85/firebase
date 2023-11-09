@@ -37,7 +37,7 @@ const Register = () => {
             })
             .catch((err) => alert(err.message))
         })
-        .catch((err) => alert(err.message))
+        .catch((err) => setError(err.message))
     }
     setEmail("");
     setPassword("");

@@ -19,10 +19,10 @@ const Login = () => {
                 if(!auth.currentUser.emailVerified){
                     sendEmailVerification(auth.currentUser)
                         .then(()=>{
-                            setTimeActive(true);
-                            navigate('/verify-email');
+                            setTimeActive(true)
+                            navigate('/verify-email')
                         })
-                        .catch(err=> alert(err.message));
+                        .catch(err=> alert(err.message))
                 } else {
                     navigate("/");
                 }
@@ -46,7 +46,7 @@ const Login = () => {
                             <Form.Control type="password" placeholder='비밀번호' value={password} onChange={(e)=>setPassword(e.target.value)}/>
                         </Form.Group>
                         <div className='text-center mt-4'>
-                            <Button variant="outline-dark">LOGIN</Button>
+                            <Button type="submit" variant="outline-dark">LOGIN</Button>
                         </div>
                     </Form>
                     <p className='mx-auto text-end pt-3'style={{ maxWidth: '400px', padding:"0 40px" }}>

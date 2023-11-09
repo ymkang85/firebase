@@ -1,8 +1,12 @@
-import React from 'react'
+import React from 'react';
+import { Container } from 'react-bootstrap';
 
 const Main = () => {
+
   return (
-    <div>Main</div>
+    <Container>
+      메인 페이지 입니다.
+    </Container>
   )
 }
 

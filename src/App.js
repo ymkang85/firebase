@@ -9,33 +9,44 @@ import Main from './components/Main';
 import Login from './components/Login';
 import Register from './components/Register';
 import VerifyEmail from './components/VerifyEmail';
+import Header from './Layout/Header';
+import Profile from './components/Profile';
 
 const App = () => {
-  const [ currentUser, setCurrentUser ] = useState(null);
-  const [ timeActive, setTimeActive ] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null);
+  const [timeActive, setTimeActive] = useState(false);
 
-  useEffect(()=>{
-    onAuthStateChanged( auth, (user) =>{
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
       setCurrentUser(user);
     })
-  },[])
+  }, [])
 
   return (
     <Router>
-      <AuthProvider value={{currentUser, timeActive, setTimeActive}}>
+      <AuthProvider value={{ currentUser, timeActive, setTimeActive }}>
         <Routes>
-          <Route exact path = "/" element={
-          <PrivateRoute>
-            <Main />
-          </PrivateRoute>
+          <Route exact path="/" element={
+            <PrivateRoute>
+              <Header>
+                <Main />
+              </Header>
+            </PrivateRoute>
+          } />
+          <Route path="/profile" element={
+            <PrivateRoute>
+              <Header>
+                <Profile />
+              </Header>
+            </PrivateRoute>
           } />
           <Route path="/login" element={
-            !currentUser?.emailVerfied? <Login /> : <Navigate to="/" replace />
-          }/>
+            !currentUser?.emailVerfied ? <Login /> : <Navigate to="/" replace />
+          } />
           <Route path="/register" element={
-            !currentUser?.emailVerfied? <Register /> : <Navigate to="/" replace />
-          }/>
-          <Route path="/Verify-email" element={<VerifyEmail />}/>
+            !currentUser?.emailVerfied ? <Header><Register /></Header> : <Navigate to="/" replace />
+          } />
+          <Route path="/verify-email" element={<VerifyEmail />} />
         </Routes>
       </AuthProvider>
     </Router>
