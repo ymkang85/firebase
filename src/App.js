@@ -12,6 +12,7 @@ import VerifyEmail from './components/VerifyEmail';
 import Header from './Layout/Header';
 import Profile from './components/Profile';
 import Upload from './components/Upload';
+import Bbs from './components/Bbs';
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState(null);
@@ -47,6 +48,7 @@ const App = () => {
           <Route path="/register" element={
             !currentUser?.emailVerfied ? <Header><Register /></Header> : <Navigate to="/" replace />
           } />
+          <Route path="/bbs" element={<Header><Bbs /></Header>} />
           <Route path="/upload" element={<Header><Upload /></Header>} />
           <Route path="/verify-email" element={<VerifyEmail />} />
         </Routes>
