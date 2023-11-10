@@ -2,13 +2,29 @@ import React, { useState } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import { auth } from "../firebase";
-import { signInWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
+import { signInWithEmailAndPassword, sendEmailVerification, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { useAuthValue } from '../context/AuthContext';
+
+const mystyle = {
+    normal : {
+        width:"calc(100% - 63px", 
+        display:"flex", 
+        color:"#fff", 
+        justifyContent:"center", 
+        alignItems:"center", 
+        cursor:"pointer",
+        backgroundColor:"#4285f4"        
+    },
+    hover:{
+        backgroundColor : "#3367d6"
+    }
+}
 
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
+    const [hover, setHover] = useState(false);
     const { setTimeActive } = useAuthValue();
     const navigate = useNavigate();
 
@@ -28,6 +44,14 @@ const Login = () => {
                 }
             })
             .catch(err => setError(err.message));
+    }
+
+    // google popup
+    const handleGoogleSignin = () =>{
+        const googleProvider = new GoogleAuthProvider();
+        signInWithPopup(auth, googleProvider)
+            .then(()=>navigate("/"))
+            .catch((err)=>alert(err.message))
     }
 
     return (
@@ -54,6 +78,11 @@ const Login = () => {
                     </p>
                 </Col>
             </Row>
+
+            <div className='d-flex justify-content-md-center mt-5 mx-auto' style={{maxWidth:"400px", border:"2px solid #4285f4"}}>
+                <div style={{width:"63px", height:"50px", background:"url(images/google.png) no-repeat 10px center", backgroundSize:"40px" }}></div>
+                <div style={{...mystyle.normal, ...( hover ? mystyle.hover : null )}} onMouseEnter={()=>setHover(true)} onMouseLeave={()=>setHover(false)} onClick={handleGoogleSignin}>sign in with Google</div>
+            </div>
         </Container>
     )
 }

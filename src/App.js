@@ -11,6 +11,7 @@ import Register from './components/Register';
 import VerifyEmail from './components/VerifyEmail';
 import Header from './Layout/Header';
 import Profile from './components/Profile';
+import Upload from './components/Upload';
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState(null);
@@ -46,6 +47,7 @@ const App = () => {
           <Route path="/register" element={
             !currentUser?.emailVerfied ? <Header><Register /></Header> : <Navigate to="/" replace />
           } />
+          <Route path="/upload" element={<Header><Upload /></Header>} />
           <Route path="/verify-email" element={<VerifyEmail />} />
         </Routes>
       </AuthProvider>

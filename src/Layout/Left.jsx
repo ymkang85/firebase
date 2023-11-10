@@ -18,6 +18,9 @@ const Left = () => {
                     <Link to="/bbs">BBS</Link>
                 </ListGroup.Item>
                 <ListGroup.Item as="li">
+                    <Link to="/upload">이미지업로드</Link>
+                </ListGroup.Item>
+                <ListGroup.Item as="li">
                     <Link onClick={() => signOut(auth)}>LOGOUT</Link>
                 </ListGroup.Item>
             </ListGroup>
